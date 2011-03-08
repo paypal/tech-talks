@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:fillViewport="true">
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:gravity="center_horizontal"
+		android:background="@drawable/bg">
+		<ImageView android:id="@+id/ImageView02" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" 
+			android:layout_marginTop="20dip" 
+			android:background="@drawable/pizzaexpress" 
+			android:paddingBottom="10dip"/>
+		<TextView android:id="@+id/ResultsTitle"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content" 
+			android:layout_marginTop="20dip"
+			android:text="Default" 
+			android:textSize="24dip" 
+			android:paddingBottom="5dip" 
+			android:paddingLeft="10dip"/>
+		<TextView android:id="@+id/ResultsText1"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content" 
+			android:text="" 
+			android:textSize="16dip" 
+			android:paddingBottom="5dip" 
+			android:paddingLeft="10dip"/>
+		<TextView android:id="@+id/ResultsText2"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content" 
+			android:text="" 
+			android:textSize="16dip" 
+			android:paddingBottom="5dip" 
+			android:paddingLeft="10dip"/>
+		<TextView android:id="@+id/ResultsText3"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content" 
+			android:text="Default" 
+			android:textSize="12dip" 
+			android:paddingBottom="5dip" 
+			android:paddingLeft="10dip"/>		
+		<LinearLayout android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:gravity="center_horizontal"
+			android:paddingTop="20dip">
+			<Button android:id="@+id/BuyMore" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="Buy More!"/>
+			<Button android:id="@+id/Done" 
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" 
+				android:text="I'm Done!"/>
+		</LinearLayout>
+	</LinearLayout>
+</ScrollView>
