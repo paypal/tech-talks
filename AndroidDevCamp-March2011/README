@@ -1,0 +1,6 @@
+The PizzaApp is a simple Android app for ordering Pizza from an Android phone.
+It has all the code to display various choices (size, topping, etc.) but without the payment functionality.
+
+The PizzaApp-Complete is the complete app integrated with the PayPal Android in-app payment library to let the users pay for their order. This is the final state of the app after following the slide deck that you will find here in this repository.
+
+The android_devcon_march_2011.pptx is the slide deck with detailed steps on how to add PayPal library and payments functionality to the PizzaApp.
