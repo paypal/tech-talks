@@ -1,6 +1,7 @@
 package com.paypal.MobilePayments.Pizza;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
@@ -33,6 +34,7 @@ import com.paypal.android.MEP.CheckoutButton;
 import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalActivity;
 import com.paypal.android.MEP.PayPalInvoiceData;
+import com.paypal.android.MEP.PayPalInvoiceItem;
 import com.paypal.android.MEP.PayPalPayment;
 
 public class PizzaMain extends Activity implements OnClickListener,
@@ -55,7 +57,8 @@ public class PizzaMain extends Activity implements OnClickListener,
 	private double _theSubtotal;
 	private double _taxAmount;
 	private String _pizzaDescription;
-
+	private String _sizeStr;
+	String _price;
 	// All the booleans we will use for toppings
 	private boolean _cheese = false;
 	private boolean _pepperoni = false;
@@ -179,66 +182,66 @@ public class PizzaMain extends Activity implements OnClickListener,
 		// Set up our DecimalFormatter for our amounts
 		_df = (DecimalFormat) DecimalFormat.getCurrencyInstance(Locale.ENGLISH);
 		_df.setCurrency(Currency.getInstance("USD"));
-		String size = "Small";
+		_sizeStr = "Small";
 		switch (_size) {
 		case SIZE_SMALL:
-			size = "Small";
+			_sizeStr = "Small";
 			break;
 		case SIZE_MEDIUM:
-			size = "Medium";
+			_sizeStr = "Medium";
 			break;
 		case SIZE_LARGE:
-			size = "Large";
+			_sizeStr = "Large";
 			break;
 		}
 
 		// Set up all the Pizza-related strings
-		_pizzaDescription = _number + " " + size + " Pizzas";
+		_pizzaDescription = _number + " " + _sizeStr + " Pizzas";
 		if (_number == 1) {
-			_pizzaDescription = _number + " " + size + " Pizza";
+			_pizzaDescription = _number + " " + _sizeStr + " Pizza";
 		}
 
 		((TextView) findViewById(R.id.NumberOfPizzas))
 				.setText(_pizzaDescription);
 		double priceAmount = 7.99;
-		String price = "7.99";
+		_price = "7.99";
 		if (_number == 1) {
 			if (_size == SIZE_SMALL) {
-				price = "7.99";
+				_price = "7.99";
 				priceAmount = 7.99;
 			} else if (_size == SIZE_MEDIUM) {
-				price = "9.99";
+				_price = "9.99";
 				priceAmount = 9.99;
 			} else {
-				price = "11.99";
+				_price = "11.99";
 				priceAmount = 11.99;
 			}
 		}
 		if (_number == 2) {
 			if (_size == SIZE_SMALL) {
-				price = "9.99";
+				_price = "9.99";
 				priceAmount = 9.99;
 			} else if (_size == SIZE_MEDIUM) {
-				price = "15.99";
+				_price = "15.99";
 				priceAmount = 15.99;
 			} else {
-				price = "19.99";
+				_price = "19.99";
 				priceAmount = 19.99;
 			}
 		} else if (_number == 3) {
 			if (_size == SIZE_SMALL) {
-				price = "11.99";
+				_price = "11.99";
 				priceAmount = 11.99;
 			} else if (_size == SIZE_MEDIUM) {
-				price = "20.99";
+				_price = "20.99";
 				priceAmount = 20.99;
 			} else {
-				price = "25.99";
+				_price = "25.99";
 				priceAmount = 25.99;
 			}
 		}
 
-		((TextView) findViewById(R.id.Price)).setText("$" + price);
+		((TextView) findViewById(R.id.Price)).setText("$" + _price);
 
 		// hide toppings, if they're not used
 		if (!_cheese) {
@@ -511,7 +514,7 @@ public class PizzaMain extends Activity implements OnClickListener,
 			// This is the main initialization call that takes in your Context,
 			// the Application ID, and the server you would like to connect to.
 			pp = PayPal.initWithAppID(this, "APP-80W284485P519543T",
-					PayPal.ENV_NONE);
+					PayPal.ENV_SANDBOX);
 
 			// -- These are required settings.
 			pp.setLanguage("en_US"); // Sets the language for the library.
@@ -534,6 +537,10 @@ public class PizzaMain extends Activity implements OnClickListener,
 			_paypalLibraryInit = true;
 		}
 	}
+	
+	/** this method generates the PayPal checkout button and adds it to the current view
+	 *  using the relative layout params
+	 */
 	private void showPayPalButton() {
 		removePayPalButton();
 		// Back in the UI thread -- show the "Pay with PayPal" button
@@ -561,6 +568,8 @@ public class PizzaMain extends Activity implements OnClickListener,
 		}
 	}
 
+	/* this method removes the PayPal button from the view
+	 */
 	private void removePayPalButton() {
 		// Avoid an exception for setting a parent more than once
 		if (launchPayPalButton != null) {
@@ -569,7 +578,9 @@ public class PizzaMain extends Activity implements OnClickListener,
 		}
 	}
 	
-	
+	/* method to handle PayPal checkout button onClick event
+	 * - this must be called from the onClick() method implemented by the application
+	 */
 	public void PayPalButtonClick(View arg0) {
 		
 			// Create a basic PayPalPayment.
@@ -578,10 +589,12 @@ public class PizzaMain extends Activity implements OnClickListener,
 			payment.setCurrencyType("USD");
 			// Sets the recipient for the payment. This can also be a phone
 			// number.
-			payment.setRecipient("ppalav_1285013097_biz@yahoo.com");
+			payment.setRecipient("pd_1265515509_biz@yahoo.com");
 			// Sets the amount of the payment, not including tax and shipping
-			// amounts.
-			payment.setSubtotal(new BigDecimal(_theSubtotal));
+			// amounts. 
+			BigDecimal st = new BigDecimal(_theSubtotal);
+			st = st.setScale(2, RoundingMode.HALF_UP);
+			payment.setSubtotal(st);
 			// Sets the payment type. This can be PAYMENT_TYPE_GOODS,
 			// PAYMENT_TYPE_SERVICE, PAYMENT_TYPE_PERSONAL, or
 			// PAYMENT_TYPE_NONE.
@@ -592,7 +605,9 @@ public class PizzaMain extends Activity implements OnClickListener,
 			// be filled out. These are not required for any transaction.
 			PayPalInvoiceData invoice = new PayPalInvoiceData();
 			// Sets the tax amount.
-			invoice.setTax(new BigDecimal(_taxAmount));
+			BigDecimal tax = new BigDecimal(_taxAmount);
+			tax = tax.setScale(2, RoundingMode.HALF_UP);
+			invoice.setTax(tax);
 			// Sets the shipping amount.
 			if (_method == METHOD_DELIVERY) {
 				invoice.setShipping(new BigDecimal("2.00"));
@@ -600,6 +615,93 @@ public class PizzaMain extends Activity implements OnClickListener,
 				PayPal.getInstance().setShippingEnabled(true);
 			}
 
+			
+			// PayPalInvoiceItem has several parameters available to it. None of these parameters is required.
+			PayPalInvoiceItem item1 = new PayPalInvoiceItem();
+			// Sets the name of the item.
+	    	item1.setName("Pizza");
+	    	// Sets the ID. This is any ID that you would like to have associated with the item.
+	    	item1.setID("1234");
+	    	// Sets the total price which should be (quantity * unit price). The total prices of all PayPalInvoiceItem should add up
+	    	// to less than or equal the subtotal of the payment.
+	    	item1.setTotalPrice(new BigDecimal(_price));
+	    	// Sets the unit price.
+	    	item1.setUnitPrice(new BigDecimal(_price));
+	    	// Sets the quantity.
+	    	item1.setQuantity(_number);
+	    	// Add the PayPalInvoiceItem to the PayPalInvoiceData. Alternatively, you can create an ArrayList<PayPalInvoiceItem>
+	    	// and pass it to the PayPalInvoiceData function setInvoiceItems().
+	    	invoice.getInvoiceItems().add(item1);
+	    	// add toppings as extra items
+	    	if (_cheese) {
+				PayPalInvoiceItem item2 = new PayPalInvoiceItem();
+				// Sets the name of the item.
+		    	item2.setName("Cheese");
+		    	// Sets the ID. This is any ID that you would like to have associated with the item.
+		    	item2.setID("2345");
+		    	// Sets the total price which should be (quantity * unit price). The total prices of all PayPalInvoiceItem should add up
+		    	// to less than or equal the subtotal of the payment.
+		    	item2.setTotalPrice(new BigDecimal("2.00"));
+		    	// Sets the unit price.
+		    	item2.setUnitPrice(new BigDecimal("2.00"));
+		    	// Sets the quantity.
+		    	item2.setQuantity(1);
+		    	// Add the PayPalInvoiceItem to the PayPalInvoiceData. Alternatively, you can create an ArrayList<PayPalInvoiceItem>
+		    	// and pass it to the PayPalInvoiceData function setInvoiceItems().
+		    	invoice.getInvoiceItems().add(item2);
+			}
+			if (_pepperoni) {
+				PayPalInvoiceItem item2 = new PayPalInvoiceItem();
+				// Sets the name of the item.
+		    	item2.setName("Pepperoni");
+		    	// Sets the ID. This is any ID that you would like to have associated with the item.
+		    	item2.setID("3456");
+		    	// Sets the total price which should be (quantity * unit price). The total prices of all PayPalInvoiceItem should add up
+		    	// to less than or equal the subtotal of the payment.
+		    	item2.setTotalPrice(new BigDecimal("2.00"));
+		    	// Sets the unit price.
+		    	item2.setUnitPrice(new BigDecimal("2.00"));
+		    	// Sets the quantity.
+		    	item2.setQuantity(1);
+		    	// Add the PayPalInvoiceItem to the PayPalInvoiceData. Alternatively, you can create an ArrayList<PayPalInvoiceItem>
+		    	// and pass it to the PayPalInvoiceData function setInvoiceItems().
+		    	invoice.getInvoiceItems().add(item2);
+			}
+			if (_mushrooms) {
+				PayPalInvoiceItem item2 = new PayPalInvoiceItem();
+				// Sets the name of the item.
+		    	item2.setName("Mushrooms");
+		    	// Sets the ID. This is any ID that you would like to have associated with the item.
+		    	item2.setID("4567");
+		    	// Sets the total price which should be (quantity * unit price). The total prices of all PayPalInvoiceItem should add up
+		    	// to less than or equal the subtotal of the payment.
+		    	item2.setTotalPrice(new BigDecimal("2.00"));
+		    	// Sets the unit price.
+		    	item2.setUnitPrice(new BigDecimal("2.00"));
+		    	// Sets the quantity.
+		    	item2.setQuantity(1);
+		    	// Add the PayPalInvoiceItem to the PayPalInvoiceData. Alternatively, you can create an ArrayList<PayPalInvoiceItem>
+		    	// and pass it to the PayPalInvoiceData function setInvoiceItems().
+		    	invoice.getInvoiceItems().add(item2);
+			}
+			if (_onions) {
+				PayPalInvoiceItem item2 = new PayPalInvoiceItem();
+				// Sets the name of the item.
+		    	item2.setName("Onions");
+		    	// Sets the ID. This is any ID that you would like to have associated with the item.
+		    	item2.setID("5678");
+		    	// Sets the total price which should be (quantity * unit price). The total prices of all PayPalInvoiceItem should add up
+		    	// to less than or equal the subtotal of the payment.
+		    	item2.setTotalPrice(new BigDecimal("2.00"));
+		    	// Sets the unit price.
+		    	item2.setUnitPrice(new BigDecimal("2.00"));
+		    	// Sets the quantity.
+		    	item2.setQuantity(1);
+		    	// Add the PayPalInvoiceItem to the PayPalInvoiceData. Alternatively, you can create an ArrayList<PayPalInvoiceItem>
+		    	// and pass it to the PayPalInvoiceData function setInvoiceItems().
+		    	invoice.getInvoiceItems().add(item2);
+			}
+			
 			// Sets the PayPalPayment invoice data.
 			payment.setInvoiceData(invoice);
 			// Sets the merchant name. This is the name of your Application or
@@ -616,8 +718,11 @@ public class PizzaMain extends Activity implements OnClickListener,
 			// This will start the library.
 			startActivityForResult(checkoutIntent, REQUEST_PAYPAL_CHECKOUT);
 	}
-	// PayPal Activity Results. This handles all the responses from the PayPal
-	// Payments Library
+	
+	/* This method handles the PayPal Activity Results. This handles all the responses from the PayPal
+	 * Payments Library.
+	 *  This method must be called from the application's onActivityResult() handler
+	 */
 	public void PayPalActivityResult(int requestCode, int resultCode, Intent intent) {
 			switch (resultCode) {
 			case Activity.RESULT_OK:
