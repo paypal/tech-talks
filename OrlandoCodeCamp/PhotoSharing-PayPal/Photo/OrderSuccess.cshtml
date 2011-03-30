@@ -1,0 +1,51 @@
+﻿<div class="receipt">
+@{
+    
+    var shippirngAddress = Request["shippingAddress"];
+    var qty = "1";
+    var price = new Decimal(1);
+    var publisher = "mytest_1296498503_biz@yahoo.com"; 
+    var printer = "isv_1284493468_biz@yahoo.com";
+    var developer = "msft_1284494024_biz@yahoo.com";
+    
+    var DevRcv = new PayPal.AdaptivePayments.Receiver();
+    DevRcv.email = developer;
+    DevRcv.amount = price;
+    
+    var PayReceivers = new List<PayPal.AdaptivePayments.Receiver>();
+    
+    var PubRcv =  new PayPal.AdaptivePayments.Receiver();
+    PubRcv.email = publisher;
+    PubRcv.amount = decimal.Round(price * .10m, 2);
+    PayReceivers.Add(PubRcv);
+    
+    var PrintRcv =  new PayPal.AdaptivePayments.Receiver();
+    PrintRcv.email = printer;
+    PrintRcv.amount = decimal.Round(price * .70m, 2);
+    PayReceivers.Add(PrintRcv);
+    
+    var Language = "en_US";
+    var CancelUrl = "http://localhost:27359"; //Change the domain and port to your environment
+    var ReturnUrl = "http://localhost:27359"; //Change the domain and port to your environment
+    var CurrencyCode = "USD";
+    
+    var response = PayPal.AdaptivePayments.ChainedPay.Execute
+       (DevRcv, PayReceivers, "", "Test Photo Payment", "127.0.0.1", "MyDevice",CancelUrl,ReturnUrl,"",CurrencyCode,Language);
+      
+    if (response == null) {
+       Response.Write("null");
+    }
+    else
+    {
+       Response.Write("full");
+    }   
+  
+    var payKey = response.payKey;
+
+    //Points to the paypal sandbox account. Change it to production url for live.
+    var redirectUrl = "https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey=" + payKey;           
+  
+    Response.Redirect(redirectUrl);   
+
+}
+</div>
