@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>New Web Project</title>
+		 <!-- Sencha Touch CSS -->
+	 <link rel="stylesheet" href="../sencha-touch-1.0.1a/resources/css/sencha-touch.css" type="text/css">
+
+	 <!-- Custom CSS -->
+	 <link rel="stylesheet" href="style.css" type="text/css">
+
+	 <!-- Google Maps JS -->
+	 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+	 <!-- Sencha Touch JS -->
+	 <script type="text/javascript" src="../sencha-touch-1.0.1a/sencha-touch-debug.js"></script>
+
+	 <!-- Application JS -->
+	 <!--
+	 <script type="text/javascript" src="main.js"></script>
+	 -->
+	 
+	  <script type="text/javascript">
+
+            new Ext.Application({
+                launch: function() {
+                    
+					 var makeAjaxRequest = function() {
+			           Ext.getBody().mask('Loading...', 'x-mask-loading', false);
+			            Ext.Ajax.request({
+			                url: '../jquery.mobile-1.0a3/ReviewOrder2.cfm',
+			                success: function(response, opts) {
+							 // Ext.getCmp('content').update(response.responseText);
+							  window.location.href = response.responseText;
+			                   // Ext.getCmp('status').setTitle('Static test.json file loaded');
+			                   // Ext.getBody().unmask();
+			                }
+			            });
+			        };
+					
+					var middle = {
+						dock:"top",
+						style:"background-color:#e2e2e2",
+						title:"Yellow",
+						html:"Hello Sencha"					
+					}
+					
+					var resetButton = new Ext.Button({
+						text:"Shout",
+						ui:"round",
+						handler: makeAjaxRequest,
+						width:100
+					})
+					
+					var bottom = {
+						dock:"bottom",
+						style:"background-color:#333333",
+						title:"bottom",
+						html:"",
+						items:[resetButton]				
+					}
+					
+					var settings = {
+						text:"Settings",
+						ui:"round",
+						xtype:"button"
+					}
+					
+					
+					
+					var header = new Ext.Toolbar({
+						dock:"top",
+						style:"background-color:#E2e2e2",
+						title:"Welcome",
+						items:[settings]				
+					})
+					
+					
+					new Ext.Panel({
+                        fullscreen: true,
+						id: 'content',
+						layout:{type:"vbox",
+							align:"stretch",
+							pack:"end"},
+						defaults:{flex:1},
+						cardSwitchAnimation:{type:"slide",duration:500},
+                       	items:[middle],
+						dockedItems: [header,bottom]
+                    });
+					
+					
+                }
+            });
+
+        </script>
+	 
+    </head>
+    <body>
+
+    </body>
+</html>
