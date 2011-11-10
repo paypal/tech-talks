@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, PizzaMain!</string>
+    <string name="app_name">PizzaApp-with-RL</string>
+    <string name="purchase_coupon_title">Coupons available for purchase</string>
+    <string name="available_points">Your current points balance:</string>
+    <string name="coupon1">$10 off (20 points)</string>
+    <string name="coupon2">Free Toppings (10 points)</string>
+    <string name="coupon3">Free Delivery (5 points)</string>
+    <string name="coupon4">Buy 50 points</string>
+    <string name="billing_not_supported_title">Can\'t make purchases</string>
+    <string name="billing_not_supported_message">The Market billing service is not available at this time.  You can continue to use this app but you won\'t be able to make purchases.</string>
+    <string name="cannot_connect_title">Can\'t connect to Market</string>
+    <string name="cannot_connect_message">This app cannot connect to Market.
+     Your version of Market may be out of date.
+     You can continue to use this app but you
+     won\'t be able to make purchases.</string>
+    <string name="restoring_transactions">Restoring transactions</string>
+    <string name="learn_more">Learn more</string>
+    <string name="help_url" formatted="false">http://market.android.com/support/bin/answer.py?answer=1050566&amp;hl=%lang%&amp;dl=%region%</string>
+	<string name="items_you_own">Items you own</string>
+    <string name="recent_transactions">Recent activity</string>
+    <!-- The following are reserved skus defined by Market for testing. -->
+    <string name="android_test_canceled">android.test.canceled</string>
+    <string name="android_test_purchased">android.test.purchased</string>
+    <string name="android_test_item_unavailable">android.test.item unavailable</string>
+    <string name="android_test_refunded">android.test.refunded</string>
+</resources>
