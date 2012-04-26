@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.xClose
+{
+	position:absolute;top:-20px;right:-20px; background:url(images/close.png) no-repeat 0px 0; width:25px;height:25px;
+}
+.xButtonContainer 
+{
+	 border-radius:8px;
+	 display:block; 
+	 z-index:10;padding:4px;
+	 font-family:Verdana, Geneva, sans-serif; 
+	 border:#FFF 2px solid; 
+	 background-image:url(../images/trans.png); 
+	 position:absolute; 
+}
+
+.xButtonName
+{
+	text-align:center;
+	width:100%;
+	margin-bottom:10px;
+	font-weight:bold;
+}
+
+.xButtonQty
+{
+	width:40px;
+	position:absolute;bottom:4px; left:80px;
+	font-size:14px;
+}
+
+.xButtonContainer label
+{
+	font-size:14px;	
+	position:absolute;bottom:10px; 
+}
+
+
+.xButtonLink
+{ 
+	background-image:url(https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif);
+	background-repeat:no-repeat;
+	background-position:top;
+	width:105px;
+	height:27px;
+	position:absolute;bottom:5px; right:5px;
+}
+
