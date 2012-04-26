@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"  title="Pay Today">
+
+	<s:layout>
+		<s:VerticalLayout gap="4" rowHeight="4" paddingLeft="10" paddingRight="10"/>
+	</s:layout>
+	<fx:Declarations>
+		<s:RemoteObject id="mycfc" 
+						destination="ColdFusion" 
+						showBusyCursor="true" 
+						source="paypal.360Flex.paytoday.invoicing"
+						endpoint="http://localhost/flex2gateway/"
+						result="result(event)" fault="fault(event)" >
+			<s:method name="CreateAndSendInvoice">
+				<s:arguments>
+					<s:Array>
+						<payerId>{payerId.text}</payerId>
+						<unitprice>{unitprice.text}</unitprice>
+						<service>{service.text}</service>
+						<paymentTerms>{paymentTerms.text}</paymentTerms>
+					</s:Array>
+				</s:arguments> 
+			</s:method>
+		</s:RemoteObject>
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import mx.collections.ArrayCollection;
+			import mx.rpc.Fault;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			private function result(evt:ResultEvent):void {
+				trace(evt.result);
+				message.text = "Congrats Invoice #" + evt.result +" Sent!";
+				
+			}
+			private function fault(evt:FaultEvent):void {
+				trace(evt.fault.message);                 
+				
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Scroller >
+		<s:VGroup>
+			<s:Spacer height="5">
+				
+			</s:Spacer>
+			<s:Label id="message" x="0" width="350" height="22">
+				none
+			</s:Label>
+			<s:Form>
+				<s:FormItem label="Service">
+					<s:TextInput id="service"  width="90%" text="Mow Lawn"/>
+				</s:FormItem>
+				<s:FormItem label="Customer Email">
+					<s:TextInput id="payerId" width="90%" text="max_1317246900_per@x.com"/>
+				</s:FormItem>
+				<s:HGroup>
+					
+					<s:FormItem label="Amount">
+						<s:HGroup verticalAlign="middle">
+							<s:Label text="$" fontWeight="bold"  fontSize="20"/>
+							<s:TextInput id="unitprice"  width="80" text="50"/>
+						</s:HGroup>
+					</s:FormItem>
+					
+					<s:FormItem label="Payment Terms">
+						<s:TextInput id="paymentTerms" width="100" text="Net30"/>
+					</s:FormItem>
+				</s:HGroup>
+				
+				<s:Spacer height="10" />
+					
+				<s:Button label="Send Invoice"  click="mycfc.CreateAndSendInvoice()"/>	
+				
+			</s:Form>
+		</s:VGroup>
+	</s:Scroller>
+	
+	
+	
+
+
+</s:View>

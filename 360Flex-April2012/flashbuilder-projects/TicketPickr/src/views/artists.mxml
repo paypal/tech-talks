@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="600" height="300"
+		  initialize="createListener(event)">
+	<s:layout>
+		<s:BasicLayout>
+			
+		</s:BasicLayout>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import events.ArtistEvent;
+			
+			private function createListener(e:Event):void {
+				b1.addEventListener(MouseEvent.CLICK, myClickHandler);
+			}
+			
+			private function myClickHandler(e:Event):void {
+				var aEvent:ArtistEvent = new ArtistEvent(ArtistEvent.UPDATE);
+				dispatchEvent(aEvent);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Label x="21" y="22" fontSize="24" text="BlingTicket"/>
+	<s:Image x="37" y="86" width="133" height="171" source="assets/images.jpeg"/>
+	<s:Button x="38" y="270" id="b1" label="JUSTIN VIP PACKAGE" />
+	<s:Image x="231" y="52" width="130" height="242" source="assets/lady-gaga-300.jpg"/>
+	<s:Image x="424" y="58" width="126" height="227"
+			 source="assets/1251229293_katy_perry_290x402.jpg"/>
+	
+	<s:Button x="234" y="270" label="GAGA VIP PACKAGE"/>
+	<s:Button x="424" y="269" label="KATY VIP PACKAGE"/>
+</s:Group>

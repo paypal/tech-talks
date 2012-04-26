@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="560" height="300">
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<s:RemoteObject id="ppGateway" 
+						destination="ColdFusion" 
+						showBusyCursor="true" 
+						source="paypal.360Flex.blingticket.gateway"
+						endpoint="http://localhost/flex2gateway/"
+						result="result(event)" fault="fault(event)" >
+			<s:method name="purchase">
+				<s:arguments>
+					<s:Array>
+						<acct>{acct.text}</acct>
+						<expdate>{expdate.text}</expdate>
+						<amt>500.00</amt>
+					</s:Array>
+				</s:arguments> 
+			</s:method>
+		</s:RemoteObject>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.rpc.Fault;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import events.ArtistEvent;
+			
+			private function result(evt:ResultEvent):void {
+				trace(evt.result);
+				if(evt.result == "Approved") {
+					approved.setVisible(true);
+					fullname.text = "";
+					acct.text = "";
+					expdate.text = "";
+					amt.text = "";
+				}
+				
+			}
+			private function fault(evt:FaultEvent):void {
+					trace(evt.fault.message);                 
+				
+			}
+		]]>
+	</fx:Script>
+	<s:Form>
+		<s:FormHeading label="Payment"/>
+		<s:FormItem label="Name on Card">
+			<s:TextInput id="fullname" text="Sidney Maestre"/>
+		</s:FormItem>
+		<s:FormItem label="CC Number">
+			<s:TextInput id="acct" text="371449635398431"/>
+		</s:FormItem>
+		<s:FormItem label="Expiration">
+			<mx:DateField id="expdate"  text="8/1/2012"/>
+		</s:FormItem>
+		<s:FormItem label="Amount">
+			<s:Label id="amt" text="500.00" />
+		</s:FormItem>
+		<s:FormItem>
+			<s:Button label="Purchase" click="ppGateway.purchase()" />
+		</s:FormItem>
+	</s:Form>
+	<mx:VBox id="approved" visible="false" paddingTop="10" paddingLeft="10">
+		<s:Image source="assets/images.jpeg"/>
+		<s:Label text="You're Seeing the Beib's" fontSize="16" fontWeight="bold" />
+	</mx:VBox>
+	
+	
+</s:Group>

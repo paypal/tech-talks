@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Beer ME!">
+	<fx:Declarations>
+		<s:RemoteObject id="mycfc" 
+						destination="ColdFusion" 
+						showBusyCursor="true" 
+						source="paypal.360Flex.beerme.adaptive"
+						endpoint="http://localhost/flex2gateway/"
+						result="result(event)" fault="fault(event)" >
+			<s:method name="SimplePay">
+				<s:arguments>
+					<s:Array>
+						<senderEmail>{senderEmail.text}</senderEmail>
+						<receiverEmail>{receiverEmail.text}</receiverEmail>
+						<receiverAmount>5.00</receiverAmount>
+						<preapprovalKey>{preapprovalKey.text}</preapprovalKey>
+					</s:Array>
+				</s:arguments> 
+			</s:method>
+		</s:RemoteObject>
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import mx.collections.ArrayCollection;
+			import mx.rpc.Fault;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			private function result(evt:ResultEvent):void {
+				trace(evt.result);
+			//	message.text = "Congrats Invoice #" + evt.result +" Sent!";
+				
+			}
+			private function fault(evt:FaultEvent):void {
+				trace(evt.fault.message);                 
+				
+			}
+		]]>
+	</fx:Script>
+	
+	
+	
+	<s:Form>
+		
+		<s:FormItem  label="My Email">
+			<s:TextInput  alpha=".2"  text="html5_1319498027_per@x.com"  width="90%" id="senderEmail">
+				
+			</s:TextInput>
+		</s:FormItem>
+	
+		<s:FormItem  label="My Friend's Email">
+			<s:TextInput  alpha=".2"  text="max_1317246900_per@x.com" width="90%" id="receiverEmail">
+				
+			</s:TextInput>
+		</s:FormItem>
+		
+		<s:FormItem >
+			
+			<s:Button label="Send Beer"   click="mycfc.SimplePay()"/>	
+		</s:FormItem>
+		
+		<s:FormItem visible="false"  color="#ffffff" label="PrapprovalKey">
+			<s:TextInput  alpha=".2" color="#000000" text="PA-21A12626TX321761K"  width="90%" id="preapprovalKey">
+				
+			</s:TextInput>
+		</s:FormItem>
+		
+	</s:Form>
+	
+</s:View>

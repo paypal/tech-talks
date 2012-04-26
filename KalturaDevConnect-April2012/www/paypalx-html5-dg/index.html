@@ -1,0 +1,114 @@
+<!-- INSERT SCRIPT INCLUDES INTO PAGE BODY -->
+<!-- THIS script is for the PayPal Digital Good Flow --->
+<script src="https://www.paypalobjects.com/js/external/dg.js"></script>
+<script src="client/jquery-1.6.2.min.js" type="text/javascript"></script>
+<!-- THIS script is for the HTML5 Toolkit --->
+<script src="client/pptransact.js"></script>
+<!-- THIS script is for the Kaltura to do JS Templating for the videos --->
+<script src="http://github.com/janl/mustache.js/raw/master/mustache.js"></script>  
+
+<input id="load" value="load video" type="button">
+
+<!-- THIS div will hold the Kaltura videos I load --->
+<div id="container">
+</div>
+
+
+<script>
+//INITIALIZE SESSION WITH APPROPRIATE LANGUAGE
+pptransact.init('php',false);
+
+//CALL BILL FUNCTION TO INITIALIZE BILL
+function bill(entryId){
+	pptransact.bill({
+		userId:'888888',
+		itemId:entryId,
+		itemQty:'1',
+		successCallback: function(){
+			//bill success
+			verify(entryId);
+		
+		},
+		failCallback: function(){
+			//bill cancelled 
+		}
+	});
+}
+
+//       7479222
+function verify(entryId){
+	
+	pptransact.verify({
+		userId:'888888',
+		itemId:entryId,
+		successCallback: function(){
+			//verify success
+			loadVideo(pptransact.getVerifyData().ks,'7525032',pptransact.getVerifyData().itemId);
+		},
+		failCallback: function(){
+			//verify cancelled
+			var flashVars = "";
+			loadVideo(flashVars,'7697662',entryId);
+			
+		}
+	});
+}
+
+//KALTURA button INSIDE my video player "Buy Now" button will trigger this method
+function customFunc1 (entryId){ 
+	bill(entryId);
+} 
+
+$(document).ready(function(e) {
+	$('#load').bind('click',function(){
+		
+		// GET INVENTORY from KALTURA 
+		pptransact.callServer('method=getInventory',function(data){
+			for (i = 0; i < data.length; i++) {
+				
+				//VERIFY and UNLOCK already purchased VIDEOS
+				verify(data[i]['number']);
+			}
+		});
+	});
+});
+
+// LOAD the KALTURA Video as a PREVIEW if no Kaltura Session OR Unlocked.
+function loadVideo(flashVars,uiConfId,entryId) {
+
+	var data, template, html;
+		
+	data = {
+		PARTNER_ID : "905501",
+		UICONF_ID : uiConfId,
+		ENTRY_ID : entryId,
+		FLASH_VARS : flashVars
+	};
+
+	template = '<object id="kaltura_player" name="kaltura_player" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="333" width="400" xmlns:dc="http://purl.org/dc/terms/" xmlns:media="http://search.yahoo.com/searchmonkey/media/" rel="media:video" resource="" data="http://www.kaltura.com/index.php/kwidget/wid/_{{PARTNER_ID}}/uiconf_id/{{UICONF_ID}}/entry_id/{{ENTRY_ID}}"><param name="allowFullScreen" value="true" /><param name="allowNetworking" value="all" /><param name="allowScriptAccess" value="always" /><param name="bgcolor" value="#000000" /><param id="flashVars" name="flashVars" value="{{FLASH_VARS}}"><param name="movie" value="http://www.kaltura.com/index.php/kwidget/wid/_{{PARTNER_ID}}/uiconf_id/{{UICONF_ID}}/entry_id/{{ENTRY_ID}}" /></object>';
+
+	html = Mustache.to_html(template, data);
+	
+	if ($('#video' + entryId).exists()) {
+		$('#video' + entryId).empty();
+		$('#video' + entryId).append(html);	
+	} else {
+		$('body').append('<div id="video'  + entryId + '">' + html + '</div><br>');
+	}
+		
+}
+
+
+function jsCallbackReady () { 
+	document.getElementsByTagName('object')[0].addJsListener("freePreviewEnd", "previewEndHandler");   
+	document.getElementsByTagName('object')[1].addJsListener("freePreviewEnd", "previewEndHandler");   
+}
+
+	
+function previewEndHandler(entryId) {
+	verify(entryId,true);
+}
+
+jQuery.fn.exists = function() { return (this.length > 0); };
+
+</script>
