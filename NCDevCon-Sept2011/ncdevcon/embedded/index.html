@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Embedded Flow</title>
+<script src="js/jquery-1.6.2.min.js"></script>
+
+<script src ="https://www.paypalobjects.com/js/external/dg.js"></script>
+
+
+<script>
+
+// JavaScript Document
+
+var dg = new PAYPAL.apps.DGFlow({});
+
+startDGFlow = function(url) {	
+	dg.startFlow(url);
+}
+		
+function releaseDG(data) {
+	alert('Unlock Virtual Good');
+	dg.closeFlow();
+}
+
+$('#buyNow').live('click', function() {	
+	var qty = $('#qty').val();
+	var id = $('#itemId').val();
+	
+	var data = 'method=setExpressCheckout&itemId=' + id + "&qty=" + qty;
+		callServer(data,function(data){
+			startDGFlow(data.redirecturl);
+	});
+});
+
+callServer = function(data,callbackFnk){
+	$.ajax({
+		url: '/ncdevcon/embedded/coldfusion/connect.cfc',
+		data: data,
+		success: function(data){
+			var obj = $.parseJSON(data);
+			
+			if(typeof callbackFnk == 'function'){
+				callbackFnk.call(this, obj);
+			}
+		}
+	});	
+}
+
+
+</script>
+
+<link type="text/css" href="css/style.css" rel="stylesheet">
+</head> 
+<body> 
+
+<input type="number" value="1" id="qty"/>
+<input type="hidden" value="123" id="itemId">
+<button id="buyNow">Buy Virtual Cow</button>
+
+<br><br>
+<a href="../index.html">home</a>
+
+</body>
+</html>
