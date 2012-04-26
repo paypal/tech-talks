@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+	
+
+    <title>TAL Donate<title>
+
+	<link rel="stylesheet" href="jquery.mobile-1.0a4.1.css" />
+    <script src="jquery-1.6.1.min.js"></script>
+
+	<script type="text/javascript" charset="utf-8" src="phonegap.1.3.0.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="SAiOSPaypalPlugin.js"></script>
+    
+	
+	
+		<script type="text/javascript" charset="utf-8">
+
+
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) 
+	{ 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+	
+	function onBodyLoad()
+	{
+		document.addEventListener("deviceready", onDeviceReady,false);
+	}
+	
+	/* When this function is called, PhoneGap has been initialized and is ready to roll */
+	function onDeviceReady()
+	{
+		try {
+		
+		// do your thing!
+		document.addEventListener(PaypalPaymentEvent.Success, onPaymentSuccess,false);
+		document.addEventListener(PaypalPaymentEvent.Canceled, onPaymentCanceled,false);
+		document.addEventListener(PaypalPaymentEvent.Failed, onPaymentFailed,false);
+		/*
+		window.plugins.paypal.prepare(PayPalPaymentType.PERSONAL);
+		window.plugins.paypal.setPaymentInfo({
+				paymentCurrency : "USD",
+				paymentAmount : $('#Amount').val(),
+				itemDesc : "network cable",
+				recipient : "name@example.com",
+				merchantName : "Cables R Us"
+		});
+		*/
+		} catch (e) {
+			debug.error(e);
+		}
+	}
+	
+	function onPaymentSuccess(evt)
+	{
+		navigator.notification.alert("Payment success, transactionID: " + evt.transactionID);
+	}
+
+	function onPaymentCanceled(evt)
+	{
+		navigator.notification.alert("Payment canceled.");
+	}
+
+	function onPaymentFailed(evt)
+	{
+		navigator.notification.alert("Payment failed, errorType: " + evt.errorType);
+		// compare evt.errorType to PayPalFailureType enum values
+	}
+    
+	  
+	$(document).ready(function(){
+		$('#donateBtn').click(function()
+		{
+			var myAmount = $('#Amount').val();
+			var myMerchantName = 'WBEZ in Chicago';
+			var myRecipient = 'donate@tal.org';
+			var myItemDesc = ' pledge drive';
+			
+			window.plugins.paypal.setPaymentInfo({
+				paymentCurrency : "USD",
+				paymentAmount : myAmount,
+				itemDesc : myItemDesc,
+				recipient : myRecipient,
+				merchantName : myMerchantName
+			});
+
+			window.plugins.paypal.pay();
+		});
+     
+	 });
+
+	
+    </script>
+	-->
+	<script src="jquery.mobile-1.0a4.1.js"></script>
+	
+  </head>
+  <body onload="onBodyLoad()">
+    <div id="checkin" data-role="page" data-theme='b'>
+        <div data-role="header">
+            <h1>NPR</h1>
+        </div>
+        <!-- /header -->
+        <div data-role="content">
+            <form id="donateForm" name="donateForm">
+                <img src="this-american-life.jpg/" style="display: block;margin-left: auto;margin-right: auto;" height="150"/>
+                <div data-role="fieldcontain">
+					  <select name="Amount" id="Amount"  data-native-menu="false" data-theme="c">
+						<option value="5">$5</option>	
+						<option value="10">$10</option>	
+						<option value="25">$25</option>	
+						<option value="50">$50</option>	
+					
+				</select>
+                </div>
+                <input type="button" name="donateBtn" id="donateBtn" value="Give Now!">
+            </form>
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+  </body>
+</html>
