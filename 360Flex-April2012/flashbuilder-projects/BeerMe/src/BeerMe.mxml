@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							skinClass="skins.AppSkin"
+							firstView="views.BeerMeHomeView" applicationDPI="160">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		
+		s|View {
+			backgroundAlpha: 0;
+		}
+		
+		s|List {
+			backgroundAlpha: 0;
+		}
+		s|Form {
+			backgroundAlpha: 0;
+		}
+		s|FormItem {
+			backgroundAlpha: 0;
+			skinClass: ClassReference("spark.skins.spark.StackedFormItemSkin");
+		}
+		
+		
+	</fx:Style>
+</s:ViewNavigatorApplication>

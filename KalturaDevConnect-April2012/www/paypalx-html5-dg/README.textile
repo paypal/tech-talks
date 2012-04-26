@@ -1,0 +1,5 @@
+h1. Kaltura Open Source Video Player Sample
+
+The sample code contained in this project is intended to be used to integrate HTML5 local storage capabilities into an in-context express checkout experience with the Kaltura open-source video player.  The Kaltura PHP client libraries are included with this project.  You may need to download the latest version from kaltura.com
+
+You'll need to signup for an account at Kaltura, and place your credentials in the Kaltura.php file.  

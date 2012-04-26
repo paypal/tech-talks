@@ -1,0 +1,39 @@
+/* Foundation v2.1.4 http://foundation.zurb.com */
+/* Artfully masterminded by ZURB  */
+
+/* -------------------------------------------------- 
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+dl.tabs.vertical dd a {font-size:11px;}
+
+.tooltip {
+	display: none; 
+	float:right;
+	margin-right:300px;
+	border: 1px solid #ccc; 
+	background-color: white; 
+	padding: 8px;
+	width:300px;
+}
+
+/* -----------------------------------------
+   Page Name 1
+----------------------------------------- */
+
+
+
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+
