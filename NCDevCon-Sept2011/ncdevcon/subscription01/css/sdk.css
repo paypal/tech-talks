@@ -1,0 +1,174 @@
+﻿body
+{
+   font-size:small;   
+   font-family:Verdana;
+   color:Black;
+}
+
+a
+{
+    color:Blue;
+}
+
+#calls
+{
+    font-family:Verdana;
+    width:500px;
+}
+
+#calls th
+{
+    padding:10px;
+}
+
+table
+{
+   font-size:x-small; 
+}
+
+td.header
+{
+	text-align:right;
+	font-size:x-small;
+	color:Black;
+	font-family:Verdana;
+	font-weight:bold;
+}
+
+#normalBold
+{
+   color:Black;
+   font-family:Verdana;
+	font-weight:bold;
+}
+
+.smaller
+{
+   font-size:smaller;
+}
+
+#normal
+{
+   color:Black;
+   font-size:small;   
+   font-family:Verdana;
+}
+
+#redBold
+{
+   color:Red;
+   font-size:small;   
+   font-family:Verdana;
+	font-weight:bold;
+}
+
+#apiheader
+{
+	text-align:center;
+	font-weight:bold;
+	font-size:larger;
+	font-family:Verdana;
+}
+
+table.api
+{
+	width:600;
+}
+
+a.home
+{
+	font-weight:bold;
+}
+
+td.field
+{
+	text-align:right;
+	font-size:x-small;
+	font-family:Verdana;
+	
+}
+
+div.key {
+	float:left;
+	width:400px;
+	display:block;
+	text-align:right;
+	padding-right:10px;
+}
+
+div.value {
+	float:left;
+	width:400px;
+	display:block;
+	text-align:left;
+}
+
+div.clear {
+	clear:both;
+}
+
+div.displayText {
+	width:850px;
+	border:1px solid #333;
+}
+
+
+form fieldset {
+  margin-bottom: 10px;
+}
+form legend {
+  padding: 0 2px;
+  font-weight: bold;
+}
+form label {
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: top;
+}
+form fieldset ol {
+  margin: 0;
+  padding: 0;
+}
+form fieldset li {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+}
+form em {
+  font-weight: bold;
+  font-style: normal;
+  color: #f00;
+}
+form label {
+  width: 150px;
+  text-align:right /* Width of labels */
+}
+
+.tHeader {
+	width:150px;
+	float:left;
+}
+
+.tRow {
+	border:1px solid #ccc; clear:both; height:40px;
+}
+
+
+
+div fieldset {
+  margin-bottom: 10px;
+}
+
+div label {
+  display: inline-block;
+  line-height: 1.8;
+}
+div fieldset ol {
+  margin: 0;
+  padding: 0;
+}
+div fieldset li {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+}
