@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:products="services.products.*" 
+		viewActivate="init(event)"
+		title="PayPal for Flex Mobile">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import spark.events.ViewNavigatorEvent;
+			import valueObjects.Model;
+			
+			public var model:Model = new Model();
+			protected function init(event:ViewNavigatorEvent):void
+			{
+				if (data != null) {
+					model = data as Model;
+				}
+			}
+			
+			protected function list_creationCompleteHandler(event:FlexEvent):void
+			{
+				getProductResult.token = products.getProduct();
+			}
+			
+			protected function list_changeHandler(event:Event):void 
+			{
+				model.item = list.selectedItem.item;
+				navigator.pushView(Detail,model);
+			}
+			
+			protected function exitBtn_clickHandler(event:MouseEvent):void
+			{
+				NativeApplication.nativeApplication.exit();
+			}
+			
+
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:CallResponder id="getProductResult"/>
+		<products:Products id="products"/>
+	</fx:Declarations>
+	
+	<s:actionContent>
+		<s:Button id="exitBtn" 
+				  click=" exitBtn_clickHandler(event)"
+				  label="Exit" />
+	</s:actionContent>
+	
+	<s:List id="list" x="0" y="0" width="100%" height="100%"
+			creationComplete="list_creationCompleteHandler(event)"
+			change="list_changeHandler(event)">
+		
+		<s:AsyncListView list="{getProductResult.lastResult}"/>
+		
+		<s:itemRenderer>
+			<fx:Component>
+				<s:IconItemRenderer iconHeight="72" 
+									iconWidth="72" iconFunction="getPhotoURL"           
+									labelFunction="getName"
+									cacheAsBitmap="true"
+									decorator="@Embed('/assets/images/arrow-symbol.png')"
+									messageField="title">
+					<fx:Script>
+						<![CDATA[
+							private function getName(o:Object):String
+							{
+								return o.item.name;
+							}
+							private function getPhotoURL(o:Object):String{
+								return o.item.image_url;
+							}
+						]]>
+					</fx:Script>			     
+				</s:IconItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+		
+	</s:List>
+</s:View>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="Order Complete" >
+	
+	<fx:Script>
+		<![CDATA[
+			protected function continueShopping(event:MouseEvent):void
+			{
+				navigator.popToFirstView();
+			}
+			
+			protected function exitBtn_clickHandler(event:MouseEvent):void
+			{
+				NativeApplication.nativeApplication.exit();
+			}
+		]]>
+	</fx:Script>
+	<s:actionContent>
+		<s:Button id="exitBtn" 
+				  click=" exitBtn_clickHandler(event)"
+				  label="Exit" />
+	</s:actionContent>
+	
+	<s:Group width="100%" height="100%">
+		<s:layout>
+			<s:VerticalLayout gap="20" verticalAlign="middle"  horizontalAlign="center"/>
+		</s:layout>
+		
+		<s:Label id="message" text="Thank you for shopping with us." />
+		
+		<s:Button 
+			id="continueShoppingButton" 
+			label="Continue Shopping"
+			click="continueShopping(event)"/>		
+	</s:Group>
+
+</s:View>

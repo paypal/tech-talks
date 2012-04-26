@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="Shopping Cart" 
+		xmlns:local="*"
+		xmlns:mobile="com.soenkerohde.mobile.*" 
+		
+		creationComplete="stageWebView.hide()"
+		viewActivate="init(event)">
+
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import spark.events.ViewNavigatorEvent;			
+			import valueObjects.Model;
+		
+			private var isCheckout:Boolean = new Boolean(true);
+			public var model:Model = new Model();
+			
+			protected function init(event:ViewNavigatorEvent):void
+			{
+				if (data != null) {
+					model = data as Model;
+					list.dataProvider = model.cart;
+					subTotal.text = "Subtotal is $" + getSubTotal(model.cart).toFixed(2);
+				}
+			}
+			
+			protected function getSubTotal(array:ArrayCollection):Number 
+			{
+				var subTotal:Number = new Number(0);
+				for (var i:Number = 0; i < array.length; i++)
+				{
+					var obj:Object = Object(array[i])
+					subTotal = subTotal + (obj["qty"] *  obj["price"]);
+				}
+				return subTotal;
+			}
+			
+			protected function backBtn_clickHandler(event:MouseEvent):void
+			{
+				if(stageWebView.url == null) {
+					navigator.popView();
+				}
+				
+				stageWebView.cancel();
+				currentState = "Start";
+				continueShoppingButton.visible = true;
+				buyButton.selected = false;
+			}
+			
+			public function payWithPayPal():void {
+				isCheckout = true;
+				currentState="Wait";
+				continueShoppingButton.visible = false;
+				
+				var urlVar: URLVariables = new URLVariables();	
+				urlVar.paymentAmount = getSubTotal(model.cart).toFixed(2);
+				var cartArray:ArrayCollection = model.cart;
+				
+				for (var i:Number = 0; i < cartArray.length; i++)
+				{
+					var obj:Object = Object(cartArray[i])
+					urlVar['L_NAME' + i] = obj["name"];
+					urlVar['L_NUMBER' + i] = obj["id"];
+					urlVar['L_QTY' + i] = obj["qty"];
+					urlVar['L_AMT' + i] = obj["price"];
+				}
+				urlVar.n = cartArray.length;
+
+				stageWebView.url="http://localhost/PayPalFlex/startPaymentFlex.php?" + urlVar	
+			}
+			
+			private function cancelPayPal():void {
+				stageWebView.cancel();
+				currentState = "Start"
+				isCheckout = false;
+			}
+
+			protected function continueShopping(event:MouseEvent):void
+			{
+				navigator.popToFirstView();
+			}
+			
+			
+			protected function stageWebView_locationChangingHandler(event:LocationChangeEvent):void
+			{
+				trace("location changing " + event.location);
+			}
+			
+			
+			protected function stageWebView_locationChangeHandler(event:LocationChangeEvent):void
+			{
+				trace("location change " + event.location);
+				var str:String = event.location;
+				if(isCheckout) {
+					if (str.indexOf("https://www.sandbox.paypal.com/") > -1) {
+						stageWebView.show();
+					}
+				}
+				
+				if ( (str.indexOf("cancel.php") > -1) ) {	
+					stageWebView.hide();
+					currentState="Start";
+					continueShoppingButton.visible = true;
+					buyButton.selected = false;
+				}
+			
+				if ( (str.indexOf("close.php") > -1) ) {
+					model.cart = new ArrayCollection();
+					stageWebView.hide();
+					currentState="Start";		
+					navigator.pushView(views.Complete);
+					continueShoppingButton.visible = true;
+					buyButton.selected = false;
+				}
+				
+			}
+			
+			protected function exitBtn_clickHandler(event:MouseEvent):void
+			{
+				NativeApplication.nativeApplication.exit();
+			}
+		
+
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="Start"/>
+		<s:State name="Wait" />
+	</s:states>
+	
+	<s:navigationContent  >
+		<s:Button id="backBtn" 
+			  label="Back" 
+			  click="backBtn_clickHandler(event)"/>	
+	</s:navigationContent>
+	<s:actionContent>
+		<s:Button id="exitBtn" 
+				  click=" exitBtn_clickHandler(event)"
+				  label="Exit" />
+	</s:actionContent>
+	
+	<mobile:StageWebViewUIComponent  
+		id="stageWebView" 
+		locationChanging="stageWebView_locationChangingHandler(event)" 
+		locationChange="stageWebView_locationChangeHandler(event)"/>
+	
+	<s:VGroup width="100%" height="100%">
+		
+		<s:List id="list"  width="100%"   >
+			<s:layout>
+				<s:VerticalLayout useVirtualLayout="false"  rowHeight="20" horizontalAlign="right" requestedMinRowCount="1"/>
+			</s:layout>
+			
+			<s:itemRenderer>
+				<fx:Component>
+					<s:LabelItemRenderer width="100%"   textAlign="right" 
+						 label="{data.name}  Qty: {data.qty}  ${data.price}">
+					</s:LabelItemRenderer>
+				</fx:Component>
+			</s:itemRenderer>
+		</s:List>
+		
+		<s:HGroup horizontalAlign="right" paddingRight="10" width="100%">	
+			<s:Label id="subTotal" />
+		</s:HGroup>
+		
+		<s:Group width="100%">
+			<s:layout>
+				<s:VerticalLayout horizontalAlign="center" paddingTop="30" verticalAlign="middle" gap="30"/>
+			</s:layout>
+	
+			<s:ToggleButton 
+					skinClass="com.PayPalBuyButton" 
+					id="buyButton"
+					click="payWithPayPal()"	/>
+			<s:Button 
+					id="continueShoppingButton" 
+					label="Continue Shopping"
+					click="continueShopping(event)"/>
+			
+		</s:Group>
+	</s:VGroup>
+	
+</s:View>

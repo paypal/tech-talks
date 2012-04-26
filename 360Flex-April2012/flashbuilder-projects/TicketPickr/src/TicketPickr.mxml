@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:v="views"
+					    title="Bling Tickets"
+					   xmlns:views="views.*"
+					   width="600" height="350" currentState="artists"
+					   creationComplete="init()">
+	<s:states>
+		<s:State name="artists"/>
+		<s:State name="creditcards"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import mx.controls.Alert;
+			import events.ArtistEvent;
+			
+			private function init():void
+			{   
+				
+				this.artist.addEventListener(ArtistEvent.UPDATE, updateCategories);
+				//this.purchase.addEventListener(ArtistEvent.COMPLETE, updateCategories);
+				
+			}
+			
+			private function updateCategories(event:ArtistEvent):void
+			{
+				trace(event);
+				currentState = "creditcards";
+			}
+			
+			private function changeState(event:ArtistEvent):void
+			{
+				trace(event);
+				currentState = "artists";
+			}
+			
+			
+		]]>
+	</fx:Script>
+	<s:transitions>
+		<s:Transition id="cc" fromState="*" toState="creditcards"> 
+			<s:Parallel id="p1" >
+				
+				<s:CrossFade  duration="350" targets="{[artist,purchase]}"/>
+			
+			</s:Parallel>
+			
+		</s:Transition> 
+	</s:transitions>
+	
+	<views:artists id="artist"  includeIn="artists"/>
+	<views:creditcard id="purchase"
+					   includeIn="creditcards" width="600" height="400"/>
+		
+</s:WindowedApplication>

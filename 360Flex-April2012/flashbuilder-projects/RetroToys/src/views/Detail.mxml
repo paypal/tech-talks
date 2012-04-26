@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:valueObjects="valueObjects.*"
+		title="Product Detail"
+		xmlns:local="*"
+		viewActivate="init(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import events.ProductEvent;
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;	
+			import spark.events.ViewNavigatorEvent;
+			import valueObjects.Model;
+			
+			public var model:Model = new Model();
+			
+			protected function init(event:ViewNavigatorEvent):void
+			{
+				if (data != null) 
+				{
+				
+					model = data as Model;
+					itemImage.source = model.item.image_url;
+					itemName.text = String(model.item.name) + ' for $' + String(model.item.price);
+					itemDesc.text = String(model.item.desc);
+					this.title = model.item.name;
+				}
+			}
+			
+			protected function backBtn_clickHandler(event:MouseEvent):void
+			{
+				navigator.popView();
+			}
+			
+			protected function exitBtn_clickHandler(event:MouseEvent):void
+			{
+				NativeApplication.nativeApplication.exit();
+			}
+			
+			
+			private function addToCart():void 
+			{
+				var myAC:ArrayCollection = model.cart;	
+				
+				if( getItemIndexByProperty(model.cart,'id',String(model.item.id) ) ) {
+					myAC.addItem(model.item);
+				}
+				
+				model.cart = myAC;
+				navigator.pushView(Cart, model);
+			}
+			
+			static public function getItemIndexByProperty(array:ArrayCollection, property:String, value:String):Boolean
+			{
+				var add:Boolean = true;
+				for (var i:Number = 0; i < array.length; i++)
+				{
+					var obj:Object = Object(array[i])
+					if (obj[property] == value) {
+						add = false;
+						obj["qty"] = obj["qty"] + 1;
+					}
+				}
+				
+				return add;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Metadata> 
+		[Event(name="productEvent", type="events.ProductEvent")] 
+	</fx:Metadata>
+	
+	<s:navigationContent  >
+		<s:Button id="backBtn" 
+				  click=" backBtn_clickHandler(event)"
+				  label="Back" />
+		
+	</s:navigationContent>
+	<s:actionContent>
+		<s:Button id="exitBtn" 
+				  click=" exitBtn_clickHandler(event)"
+				  label="Exit" />
+	</s:actionContent>
+
+	<s:Form>		
+		<s:BitmapImage id="itemImage" height="150" width="150"  source="@Embed('/assets/images/placeholder.jpg')"   />
+		<s:Label id="itemName" text="hello"/>
+		
+		<s:Button   x="600" y="513" 
+			  id="addToCardButton"  
+			  label="Add to Cart"
+			  click="addToCart()"/>
+		<s:TextArea editable="false"   id="itemDesc" text=""/>
+	</s:Form>
+	
+</s:View>
