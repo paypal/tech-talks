@@ -1,8 +1,39 @@
 # Public Internationalization Tech-Talks from PayPal
 
-## [Internationalization and Unicode Conference](http://unicodeconference.org/)
+#### List of Talks and Papers
 
-### [38th Internationalization and Unicode Conference](http://unicodeconference.org/iuc38/Program.pdf), November 3-5, 2014, Santa Clara, CA, USA
+* [Internationalization and Unicode Conferences](#internationalization-and-unicode-conferences)
+  * [38th Internationalization and Unicode Conference](#38th-internationalization-and-unicode-conference)
+    * [Using GPS to Track Your Position and Trajectory](#using-gps-to-track-your-position-and-trajectory)
+    * [Address Standards, Formats, and Nightmares](#address-standards-formats-and-nightmares)
+    * [Pseudo Localization in Action](#pseudo-localization-in-action)
+  * [39th Internationalization and Unicode Conference](#39th-internationalization-and-unicode-conference)
+    * [Multilingual Transliteration - Standards, Technology, and Issues](#multilingual-transliteration---standards-technology-and-issues)
+    * [Griffin - PayPal Node.js API for i18n](#griffin---paypal-nodejs-api-for-i18n)
+    * [Continuing Adventures Going Door-to-Door Around the World](#continuing-adventures-going-door-to-door-around-the-world)
+  * [40th Internationalization and Unicode Conference](#40th-internationalization-and-unicode-conference)
+    * [Lightning Talks -  Locale resolution at scale](#lightning-talks----locale-resolution-at-scale)
+    * [The New PayPal Mobile App](#the-new-paypal-mobile-app)
+    * [Unicode, CLDR, and KYC, KYB, and Money Laundering](#unicode-cldr-and-kyc-kyb-and-money-laundering)
+* [IMUG- Internationalization and Multilingual Users Group](#imug--internationalization-and-multilingual-users-group)
+    * [How PayPal launched a global app in 140  countries simultaneously](#how-paypal-launched-a-global-app-in-140-countries-simultaneously)
+* [SF Globalization Meetup](#sf-globalization-meetup)
+    * [Address Standards, Formats, and Nightmares](#address-standards-formats-and-nightmares-1)
+    * [Internationalization Aspects of Money Laundering](#internationalization-aspects-of-money-laundering)
+
+
+
+
+
+## Internationalization and Unicode Conferences
+
+[IUC Conferences](http://unicodeconference.org/)
+
+### 38th Internationalization and Unicode Conference
+
+*November 3-5, 2014, Santa Clara, CA, USA*
+
+[Conference Site](http://unicodeconference.org/iuc38/Program.pdf)
 
 #### Using GPS to Track Your Position and Trajectory
 
@@ -62,7 +93,11 @@ Pseudo localization is an effective way to detect i18n/l10n issues, the effectiv
 
 In this talk, we will present challenges and success of our pseudo-localization tool, the kind of issues that are detected by the tool, as well as the use of it as an education tool to engineering and UI/content designers. We will discuss the documented increase in quality since integrating the tool with development, design, and CI processes.
 
-### [39th Internationalization and Unicode Conference](http://unicodeconference.org/iuc39/program-details.pdf), October 26-28, 2015, Santa Clara, CA, USA
+### 39th Internationalization and Unicode Conference
+
+*October 26-28, 2015, Santa Clara, CA, USA*
+
+[Conference Site](http://unicodeconference.org/iuc39/program-details.pdf)
 
 #### Multilingual Transliteration - Standards, Technology, and Issues
 
@@ -118,7 +153,11 @@ In this talk, we'll present:
 
 This talk has been updated and improved based on community feedback, more involvement with the open source community, and experience actually working with customers on every continent.
 
-### [40th Internationalization and Unicode Conference](http://unicodeconference.org/iuc40/Conference_Program.pdf), November 1-3, 2016, Santa Clara, CA, USA
+### 40th Internationalization and Unicode Conference
+
+*November 1-3, 2016, Santa Clara, CA, USA*
+
+[Conference Site](http://unicodeconference.org/iuc40/Conference_Program.pdf)
 
 #### Lightning Talks -  Locale resolution at scale 
 
@@ -175,9 +214,17 @@ In this session, you will get a quick overview of KYC, KYB, Risk and Compliance,
 - How Unicode helps to reduce Risk in user sign-up
 - How International Components for Unicode (ICU) helps with AML and finding Designated Individuals
 
-## [IMUG](http://imug.org/) - Internationalization and Multilingual Users Group, SF Bay Area
+## IMUG- Internationalization and Multilingual Users Group
 
-[How PayPal launched a global app in 140+ countries simultaneously](http://imug.org/events/imug-2016-events.htm#paypal), September 15, 2016
+SF Bay Area
+
+[IMUG Site](http://imug.org/)
+
+#### How PayPal launched a global app in 140+ countries simultaneously
+
+*September 15, 2016*
+
+[IMUG Page for this session]((http://imug.org/events/imug-2016-events.htm#paypal))
 
 *Lucas Welti*
 
@@ -187,9 +234,15 @@ These days most commerce happens online, and mobile has become a key player. Thi
 
 This was done using new platforms and process to make it easier to localize and customize. From design to development, the PayPal globalization team has been involved since day 1, providing internationalization support and QA, reviewing content, and delivering translations. 
 
-## [SF Globalization Meetup](https://www.meetup.com/sf-globalization/)
+## SF Globalization Meetup
 
-#### [Address Standards, Formats, and Nightmares](https://www.meetup.com/sf-globalization/events/214065882/), March 2, 2015
+[Meetup Site](https://www.meetup.com/sf-globalization/)
+
+#### Address Standards, Formats, and Nightmares
+
+*March 2, 2015*
+
+[Meetup page for this session](https://www.meetup.com/sf-globalization/events/214065882/)
 
 *Mike McKenna*
 
@@ -213,7 +266,11 @@ If your application deals with addresses for multiple countries, this talk will 
 
 • Devising an XML layout syntax based off CLDR and LDML to put name and address layout meta data in a machine-readable form
 
-#### [Internationalization Aspects of Money Laundering](https://www.meetup.com/sf-globalization/events/237082980/), May 10, 2017, San Francisco
+#### Internationalization Aspects of Money Laundering
+
+*May 10, 2017, San Francisco*
+
+[Meetup page for this session](https://www.meetup.com/sf-globalization/events/237082980/)
 
 *Mike McKenna*
 
