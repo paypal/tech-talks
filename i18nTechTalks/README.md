@@ -129,7 +129,7 @@ Presentation: [PDF File](./IUC-40/LT-Kandaswamy.pdf)
 
 This lightning talk takes a look at the concept, building blocks, and sample locale resolution logic needed to resolve locale for users depending on 
 
-- Browser settings 
+- Browser settings
 - Cookie 
 - Session cookie 
 - IP address/Geo location 
@@ -181,7 +181,7 @@ In this session, you will get a quick overview of KYC, KYB, Risk and Compliance,
 
 *Lucas Welti*
 
-Presentation: [PPT File](./IMUG/ImugPayPal.pptx)
+Presentation: [PDF File](./IMUG/ImugPayPal-Sep-2016.pdf)
 
 These days most commerce happens online, and mobile has become a key player. This talk will explain how PayPal was able to launch the new PayPal Mobile app for iOS and Android simultaneously in more than 140 markets.
 
@@ -217,7 +217,7 @@ If your application deals with addresses for multiple countries, this talk will 
 
 *Mike McKenna*
 
-Presentation: [PDF File](./SF-G11n/SF-G11n-2017-05-McKenna-i18n_Money Laundering.pdf)
+Presentation: [PDF File](./SF-G11n/SF-G11n-2017-05-McKenna-i18n_Money_Laundering.pdf)
 
 In today's world, when money is passed from one party to another, someone else is watching that transaction and must decide if it is legal or suspicious. Every legal money institution is required to "Know Your Customer" - known in the industry as "KYC", and "Know Your Business" (KYB). This is to reduce risk, reduce money laundering, and for regulatory requirements, to comply with local and international governments. 
 
