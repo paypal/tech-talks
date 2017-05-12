@@ -27,13 +27,19 @@
 
 ## Internationalization and Unicode Conferences
 
-[IUC Conferences](http://unicodeconference.org/)
+http://unicodeconference.org/
+
+---
+
+---
 
 ### 38th Internationalization and Unicode Conference
 
 *November 3-5, 2014, Santa Clara, CA, USA*
 
 [Conference Site](http://unicodeconference.org/iuc38/Program.pdf)
+
+---
 
 #### Using GPS to Track Your Position and Trajectory
 
@@ -53,7 +59,7 @@ Whether you're creating an application for a few locales or a few dozen, you'll 
 At PayPal, we've developed a Globalization roadmap for our development teams to follow and a system to track and grade the maturity of our products.
 In this talk, we'll present the Globalization Maturity Model (GMM) which divides i18n capabilities into groups providing a roadmap of i18n support to be developed. We'll also present the Globalization Product Scorecard (GPS) which can be used to track and grade the maturity of global-readiness in your products. The GPS at PayPal is composed of three measures: the level of i18n maturity according to the GMM, a globalization quality score, and a global product management score.
 
-
+---
 
 ####  Address Standards, Formats, and Nightmares
 
@@ -76,6 +82,8 @@ If your application deals with addresses for multiple countries, this talk will 
 - Handling address data in the app (This is an opportunity to present the Canonical Format, Locale Neutral Format)
 - Devising an XML layout syntax based off CLDR and LDML to put name and address layout meta data in a machine-readable form
 
+---
+
 #### Pseudo Localization in Action
 
 *Xiang Xu*
@@ -93,11 +101,17 @@ Pseudo localization is an effective way to detect i18n/l10n issues, the effectiv
 
 In this talk, we will present challenges and success of our pseudo-localization tool, the kind of issues that are detected by the tool, as well as the use of it as an education tool to engineering and UI/content designers. We will discuss the documented increase in quality since integrating the tool with development, design, and CI processes.
 
+---
+
+---
+
 ### 39th Internationalization and Unicode Conference
 
 *October 26-28, 2015, Santa Clara, CA, USA*
 
 [Conference Site](http://unicodeconference.org/iuc39/program-details.pdf)
+
+---
 
 #### Multilingual Transliteration - Standards, Technology, and Issues
 
@@ -107,6 +121,8 @@ I18n Product Owner, PayPal, Inc.
 Presentation: [PDF File](./IUC-39/IUC39-McKenna-Transliteration.pdf)
 
 In the expanding European Union, a majority of people speak at least two languages. In the United States, English is becoming a second language to a larger and larger segment of the population. Even so, official documents, phone books, bibliographic records, and other digital repositories may need to present native language source information (e.g., Russian or Greek) in a transliterated form to allow it to be interpreted by someone who does not speak or read that language. This paper will present a survey of issues confronting the language engineer along with solutions and available technologies. We will look at historical standards and contexts in which the standards become useless. We will then look at early work funded by the Directorate General for Research of the European Union, then on to solutions provided by Java and software libraries. We'll finish by taking a look at some commercial universal names databases and the technology behind them.
+
+---
 
 #### Griffin - PayPal Node.js API for i18n
 
@@ -123,6 +139,8 @@ In late 2013, PayPal made a corporate decision to migrate to Node.js. However, N
 This talk will discuss the effort the PayPal Internationalization Technology Team went through to investigate all known Open Source options, decide on an appropriate infrastructure to build upon, then customization of CLDR and other data to fit in to that infrastructure to finally enable Node.js products to support validation, normalization, display, and html and semantic markup of dates, times, numbers, currencies, phone, postal address, and personal names in 200+ countries and 27 languages. Included will be methods used to reduce the memory footprint, the decisions made to use regional territory containment and choice of English locales to use for fallback in the many countries where CLDR does not have an appropriate English locale defined.
 
 As a finale, we will demonstrate the Griffin Reference App created to allow content owners to view formats according to locale, and encourage just-in-time learning by providing a pre-populated Node.js playground, similar to W3School's "Try it Yourself" JavaScript playground app.
+
+---
 
 #### Continuing Adventures Going Door-to-Door Around the World
 
@@ -153,11 +171,17 @@ In this talk, we'll present:
 
 This talk has been updated and improved based on community feedback, more involvement with the open source community, and experience actually working with customers on every continent.
 
+---
+
+---
+
 ### 40th Internationalization and Unicode Conference
 
 *November 1-3, 2016, Santa Clara, CA, USA*
 
 [Conference Site](http://unicodeconference.org/iuc40/Conference_Program.pdf)
+
+---
 
 #### Lightning Talks -  Locale resolution at scale 
 
@@ -177,6 +201,8 @@ This lightning talk takes a look at the concept, building blocks, and sample loc
 - User profile 
 - Configured default locale
 
+---
+
 #### The New PayPal Mobile App
 
 *Lucas Welti*
@@ -191,6 +217,8 @@ The previous PayPal Mobile frameworks did not support some of the unique PayPal 
 It was important for us to ensure that customers had a consistent experience across all devices from web to smart phone, and for that reason a lot of the Dates, Name, Address, Currency Metadata that is shared between our web applications and Mobile Apps, have only ONE source of truth.
 
 This talk will explain how PayPal was able to launch their new Mobile App for iOS and Android and make it available for 145 markets. This was done using new platforms and processes to make it easier to localize and customize. From Design to Development, the Globalization Team was involved from Day 1, providing Internationalization support, Globalization Q&A, reviewing Content and delivering translations.
+
+---
 
 #### Unicode, CLDR, and KYC, KYB, and Money Laundering
 
@@ -214,11 +242,17 @@ In this session, you will get a quick overview of KYC, KYB, Risk and Compliance,
 - How Unicode helps to reduce Risk in user sign-up
 - How International Components for Unicode (ICU) helps with AML and finding Designated Individuals
 
+---
+
+---
+
 ## IMUG- Internationalization and Multilingual Users Group
 
 SF Bay Area
 
 [IMUG Site](http://imug.org/)
+
+---
 
 #### How PayPal launched a global app in 140+ countries simultaneously
 
@@ -234,9 +268,15 @@ These days most commerce happens online, and mobile has become a key player. Thi
 
 This was done using new platforms and process to make it easier to localize and customize. From design to development, the PayPal globalization team has been involved since day 1, providing internationalization support and QA, reviewing content, and delivering translations. 
 
+---
+
+---
+
 ## SF Globalization Meetup
 
 [Meetup Site](https://www.meetup.com/sf-globalization/)
+
+---
 
 #### Address Standards, Formats, and Nightmares
 
@@ -265,6 +305,8 @@ If your application deals with addresses for multiple countries, this talk will 
 • Handling address data in the app (this is an opportunity to present the canonical format, locale neutral format)
 
 • Devising an XML layout syntax based off CLDR and LDML to put name and address layout meta data in a machine-readable form
+
+---
 
 #### Internationalization Aspects of Money Laundering
 
