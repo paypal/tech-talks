@@ -193,10 +193,10 @@ Presentation: [PDF File](./IUC-40/LT-Kandaswamy.pdf)
 This lightning talk takes a look at the concept, building blocks, and sample locale resolution logic needed to resolve locale for users depending on 
 
 * Browser settings
-* Cookie
-* Session cookie
+* Cookie
+* Session cookie
 * IP address/Geo location
-* URL parameter
+* URL parameter
 * URL domain
 * User profile
 * Configured default locale
