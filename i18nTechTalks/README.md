@@ -3,26 +3,27 @@
 #### List of Talks and Papers
 
 * [Internationalization and Unicode Conferences](#internationalization-and-unicode-conferences)
-  * [38th Internationalization and Unicode Conference](#38th-internationalization-and-unicode-conference)
-    * [Using GPS to Track Your Position and Trajectory](#using-gps-to-track-your-position-and-trajectory)
-    * [Address Standards, Formats, and Nightmares](#address-standards-formats-and-nightmares)
-    * [Pseudo Localization in Action](#pseudo-localization-in-action)
-  * [39th Internationalization and Unicode Conference](#39th-internationalization-and-unicode-conference)
-    * [Multilingual Transliteration - Standards, Technology, and Issues](#multilingual-transliteration---standards-technology-and-issues)
-    * [Griffin - PayPal Node.js API for i18n](#griffin---paypal-nodejs-api-for-i18n)
-    * [Continuing Adventures Going Door-to-Door Around the World](#continuing-adventures-going-door-to-door-around-the-world)
+  * [41st Internationalization and Unicode Conference](#41st-internationalization-and-unicode-conference)
+    * [XXX Extending Libphonenumber for Fun and Profit](#lightning-talks----locale-resolution-at-scale)
+    * [XXX Enhancing Date, Time, Timezone Support in Globalize.js](#the-new-paypal-mobile-app)
+    * [XXX What's NOT in a Name?](#unicode-cldr-and-kyc-kyb-and-money-laundering)
   * [40th Internationalization and Unicode Conference](#40th-internationalization-and-unicode-conference)
     * [Lightning Talks -  Locale resolution at scale](#lightning-talks----locale-resolution-at-scale)
     * [The New PayPal Mobile App](#the-new-paypal-mobile-app)
     * [Unicode, CLDR, and KYC, KYB, and Money Laundering](#unicode-cldr-and-kyc-kyb-and-money-laundering)
+  * [39th Internationalization and Unicode Conference](#39th-internationalization-and-unicode-conference)
+    * [Multilingual Transliteration - Standards, Technology, and Issues](#multilingual-transliteration---standards-technology-and-issues)
+    * [Griffin - PayPal Node.js API for i18n](#griffin---paypal-nodejs-api-for-i18n)
+    * [Continuing Adventures Going Door-to-Door Around the World](#continuing-adventures-going-door-to-door-around-the-world)
+  * [38th Internationalization and Unicode Conference](#38th-internationalization-and-unicode-conference)
+    * [Using GPS to Track Your Position and Trajectory](#using-gps-to-track-your-position-and-trajectory)
+    * [Address Standards, Formats, and Nightmares](#address-standards-formats-and-nightmares)
+    * [Pseudo Localization in Action](#pseudo-localization-in-action)
 * [IMUG- Internationalization and Multilingual Users Group](#imug--internationalization-and-multilingual-users-group)
     * [How PayPal launched a global app in 140  countries simultaneously](#how-paypal-launched-a-global-app-in-140-countries-simultaneously)
 * [SF Globalization Meetup](#sf-globalization-meetup)
     * [Address Standards, Formats, and Nightmares](#address-standards-formats-and-nightmares-1)
     * [Internationalization Aspects of Money Laundering](#internationalization-aspects-of-money-laundering)
-
-
-
 
 
 ## Internationalization and Unicode Conferences
@@ -241,6 +242,65 @@ In this session, you will get a quick overview of KYC, KYB, Risk and Compliance,
 - How to use CLDR to reduce Risk in user information
 - How Unicode helps to reduce Risk in user sign-up
 - How International Components for Unicode (ICU) helps with AML and finding Designated Individuals
+
+---
+
+---
+
+### 41st Internationalization and Unicode Conference
+
+*October 16-18, 2017, Santa Clara, CA, USA*
+
+[Conference Site](http://unicodeconference.com/iuc41/index.htm)
+
+#### Extending Libphonenumber for Fun and Profit
+
+*Daniel Bruhn*
+i18n Engineer
+
+Presentation: [PDF File](./IUC-41/S4T3-Bruhn.pdf)
+Gitub *[fullstack-phone](https://github.com/paypal/fullstack-phone)*
+
+Google’s [libphonenumber library](https://github.com/googlei18n/libphonenumber) is the de-facto industry standard for processing international phone numbers, providing support for formatting, validating, and normalizing phone numbers in 250+ regions. However, the default phone metadata is quite heavy. Various custom packages have reduced the code & metadata footprint by:
+
+* Simplifying the API and pre-compiling with Closure ([grantila/awesome-phonenumber](https://github.com/grantila/awesome-phonenumber))
+* Providing individually compiled code+metadata bundles for each region ([leodido/i18n.phonenumbers.js](https://github.com/leodido/i18n.phonenumbers.js/blob/master/README.md), [nathanhammond/libphonenumber](https://github.com/nathanhammond/libphonenumber))
+* Rewriting the entire library without Closure and providing the option to hot load metadata for groups of regions ([halt-hammerzeit/libphonenumber-js](https://devhub.io/repos/halt-hammerzeit-libphonenumber-js))
+
+For my use case, I needed:
+* The official libphonenumber code (not a pure JS re-write)
+* A static code base that doesn’t change for different regions
+* Hot loadable metadata bundles for individual regions
+
+And so, I implemented yet another custom JS libphonenumber package. In this talk I will present this package and discuss some of the interesting challenges in producing a customized version of libphonenumber.
+
+#### Enhancing Date, Time, Timezone Support in Globalize.js
+
+*Manikandan Ramalingam Kandaswamy*
+i18n Engineer
+
+Presentation: [PDF File](./IUC-41/S7T2-Kandaswamy.pdf)
+Github: *[globalize.js](https://github.com/globalizejs/globalize/commit/7eda86cc549a4d0c8d176b696ae7b6834d36fc96)*
+
+Is [Globalize.js](https://github.com/globalizejs) on its way to becoming the ICU of the Javascript world? Let’s find out. Globalize.js has been adopted as the internationalization library of choice in Javascript by organizations ranging from Twitter, PayPal, IBM to many startups. Globalize.js has been key in providing i18n features including date, time, number, message formats, plurals, units and relative time. Now, with the latest enhancements, Globalize.js also supports complex date, time and timezone transformations. The library supports IANA and CLDR standards with a tiny footprint one-fifth the size for code and data compared to similar libraries like moment.js. This talk covers these enhancements and how you can use Globalize for your i18n needs.
+
+#### What's NOT in a Name?
+
+*Mike McKenna*
+i18n Architect
+
+Presentation: [PDF File](./IUC-41/S12T2-McKenna.pdf)
+
+When conducting financial transactions, the regulations of many countries and international treaties dictate that to help with anti-money laundering (AML) and combating the financing of terrorism (CFT), business relations with anonymous clients or clients using fake names is prohibited. So as part of the due diligence to comply in a global marketplace, applications need to have confidence that a name entered has a high probability of being authentic, and are able to quickly detect if a name may be gibberish, fake, or incomplete. This presentation explores the multi-regional and multilingual aspects of detecting what is *not* in a name.
+
+There are established natural language processing (NLP) techniques to create probabilities of character sequences for determining the likelihood that a word or phrase is written in a specific language. Names are text, but not all text are names. This talk explores
+
+* Standard NLP - using probability theory with 2-character Markov chains
+* Sourcing and using regional census and names databases to train good patterns
+* Examples of fake, gibberish and incomplete names in English
+* Why English positive and negative patterns do not apply across languages and regions
+* Using CLDR keyboard maps and regional honorifics to train gibberish detection patterns
+* Negative probability of mixed script names
 
 ---
 
